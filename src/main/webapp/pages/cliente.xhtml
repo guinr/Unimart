@@ -6,30 +6,53 @@ xmlns:p="http://primefaces.org/ui"
 xmlns:f="http://xmlns.jcp.org/jsf/core">
 	<h:head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<title>Cadastro de Cliente</title>
+		<title>Cadastro de Clientes</title>
 	</h:head>
 	<h:body>
-		<p:growl id="mensagem"/>
-		<h:form>
-			<p:panel>
-				<p:dataTable emptyMessage="Sem Registros" paginator="true">
+		<p:growl id="msg"/>
+		<h:form id="frmTab">
+			<p:panel header="Cliente">
+				<p:dataTable id="table" emptyMessage="Sem Registros" paginator="true" value="#{clienteBean.clienteList}" var="cliente">
 					<f:facet name="header">
-						<p:commandButton value="Novo" oncomplete="PF('dlg').show()"></p:commandButton>
+						<p:commandButton value="Novo" actionListener="#{clienteBean.novo}" oncomplete="PF('dlg').show()" update=":frmCad:telaCad"></p:commandButton>
 					</f:facet>
-					<p:column headerText="Nome"></p:column>
-					<p:column headerText="Opcoes"></p:column>
+					<p:column headerText="Nome" sortBy="cliente.nome">
+						<h:outputText value="#{cliente.nome}" />
+					</p:column>
+					<p:column headerText="Email" sortBy="cliente.email">
+						<h:outputText value="#{cliente.email}" />
+					</p:column>
+					<p:column headerText="Opções">
+						<p:commandButton icon="ui-icon-trash" actionListener="#{clienteBean.excluir}" update=":msg :frmTab:table">
+							<p:confirm header="Confirmação" message="Exluir Cliente ?" icon="ui-icon-info" />
+							<f:attribute name="clienteExcluir" value="#{cliente}"/>
+						</p:commandButton>
+						<p:commandButton icon="ui-icon-pencil" oncomplete="PF('dlg').show();" actionListener="#{clienteBean.alterar}" update=":frmCad:telaCad">
+							<f:attribute name="clienteAlterar" value="#{cliente}"></f:attribute>
+						</p:commandButton>
+					</p:column>
 				</p:dataTable>
+				
+				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+			        <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+			        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			    </p:confirmDialog>
+				
 			</p:panel>
-			<p:dialog header="Cliente - Cadastro" widgetVar="dlg" resizable="false" draggable="false" modal="true" closable="false">
-				<h:panelGrid columns="2">
+		</h:form>
+		<p:dialog header="Clientes - Cadastro" widgetVar="dlg" resizable="false" draggable="false" modal="true" closable="false">
+			<h:form id="frmCad">
+				<h:panelGrid columns="2" id="telaCad">
 					<p:outputLabel value="Nome"/>
-					<p:inputText size="20" maxlength="30"/>
+					<p:inputText size="30" maxlength="30" value="#{clienteBean.cliente.nome}"/>
+					<p:outputLabel value="E-mail"/>
+					<p:inputText size="30" maxlength="30" value="#{clienteBean.cliente.email}"/>
 				</h:panelGrid>
 				<h:panelGrid columns="2">
-					<p:commandButton value="Salvar" actionListener="#{clienteBean.salvar}" update=":mensagem"/>
+					<p:commandButton value="Salvar" actionListener="#{clienteBean.salvar}" update=":msg :frmCad:telaCad :frmTab:table"/>
 					<p:commandButton value="Fechar" oncomplete="PF('dlg').hide();"/>
 				</h:panelGrid>
-			</p:dialog>
-		</h:form>
+			</h:form>
+		</p:dialog>	
 	</h:body>
 </html>
