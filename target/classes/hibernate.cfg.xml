@@ -36,6 +36,9 @@
 		<mapping class="br.com.unisul.unimart.domain.Produto"/>
 		<mapping class="br.com.unisul.unimart.domain.Pedido"/>
 		<mapping class="br.com.unisul.unimart.domain.ItemPedido"/>
+		<mapping class="br.com.unisul.unimart.domain.StatusPedido"/>
+		<mapping class="br.com.unisul.unimart.domain.CondicaoPagamento"/>
+		<mapping class="br.com.unisul.unimart.domain.ProdutoCategoria"/>
 	</session-factory>
 
 </hibernate-configuration>

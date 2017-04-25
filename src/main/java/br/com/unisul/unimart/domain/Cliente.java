@@ -16,9 +16,6 @@ public class Cliente extends GenericDomain {
 	@Column(length=128)
 	private String senha;
 	
-	@Column()
-	private Double saldo;
-	
 	public String getNome() {
 		return nome;
 	}
@@ -41,14 +38,6 @@ public class Cliente extends GenericDomain {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
-	}
-
-	public Double getSaldo() {
-		return saldo;
-	}
-
-	public void setSaldo(Double saldo) {
-		this.saldo = saldo;
 	}
 	
 }
