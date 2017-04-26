@@ -1,5 +1,8 @@
 package br.com.unisul.unimart.bean;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.io.Serializable;
 import java.util.List;
 
@@ -9,6 +12,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 
 import org.omnifaces.util.Messages;
+import org.primefaces.model.UploadedFile;
 
 import br.com.unisul.unimart.dao.ProdutoCategoriaDao;
 import br.com.unisul.unimart.domain.ProdutoCategoria;
@@ -20,6 +24,7 @@ public class produtoCategoriaBean implements Serializable {
 	
 	private ProdutoCategoria produtoCategoria;
 	private	List<ProdutoCategoria> produtoCategoriaList;
+	private UploadedFile file;
 	
 	public ProdutoCategoria getProdutoCategoria() {
 		return produtoCategoria;
@@ -36,6 +41,14 @@ public class produtoCategoriaBean implements Serializable {
 	public void setProdutoCategoriaList(List<ProdutoCategoria> ProdutoCategoriaList) {
 		this.produtoCategoriaList = ProdutoCategoriaList;
 	}
+	
+	public UploadedFile getFile() {
+        return file;
+    }
+ 
+    public void setFile(UploadedFile file) {
+        this.file = file;
+    }
 	
 	@PostConstruct
 	public void listar() {
@@ -68,9 +81,17 @@ public class produtoCategoriaBean implements Serializable {
 	public void alterar(ActionEvent event) {
 		produtoCategoria = (ProdutoCategoria)event.getComponent().getAttributes().get("produtoCategoriaAlterar");
 	}
-
+	
 	public void salvar() {
 		try {
+			if (file != null) {
+				File icone = new File(file.getFileName());
+			    OutputStream out = new FileOutputStream(icone);
+			    //--colocar imagem no produtoCategoria
+			    produtoCategoria.setImagem(file.getContents());
+			    out.write(file.getContents());
+			    out.close();
+			}
 			ProdutoCategoriaDao produtoCategoriaDao = new ProdutoCategoriaDao();
 			produtoCategoriaDao.merge(produtoCategoria);
 			Messages.addGlobalInfo("Categoria de produto cadastrado com sucesso");

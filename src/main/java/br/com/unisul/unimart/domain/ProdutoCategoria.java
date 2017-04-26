@@ -9,9 +9,8 @@ public class ProdutoCategoria extends GenericDomain {
 
 	@Column(length=45)
 	private String nome;
-	
 	@Column()
-	private Byte[] imagem;
+	private byte[] imagem;
 
 	public String getNome() {
 		return nome;
@@ -21,11 +20,11 @@ public class ProdutoCategoria extends GenericDomain {
 		this.nome = nome;
 	}
 	
-	public Byte[] getImagem() {
+	public byte[] getImagem() {
 		return imagem;
 	}
 
-	public void setImagem(Byte[] imagem) {
+	public void setImagem(byte[] imagem) {
 		this.imagem = imagem;
 	}
 	
