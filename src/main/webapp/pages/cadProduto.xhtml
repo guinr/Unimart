@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+xmlns:h="http://xmlns.jcp.org/jsf/html"
+xmlns:p="http://primefaces.org/ui"
+xmlns:f="http://xmlns.jcp.org/jsf/core">
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>Cadastro de Produtos</title>
+	</h:head>
+	<h:body>
+		<p:growl id="msg"/>
+		<h:form id="frmTab">
+			<p:panel header="Produto">
+				<p:dataTable id="table" emptyMessage="Sem Registros" paginator="true" value="#{produtoBean.produtoList}" var="produto">
+					<f:facet name="header">
+						<p:commandButton value="Novo" actionListener="#{produtoBean.novo}" oncomplete="PF('dlg').show()" update=":frmCad:telaCad"></p:commandButton>
+					</f:facet>
+					<p:column headerText="Nome" sortBy="produto.nome">
+						<h:outputText value="#{produto.nome}" />
+					</p:column>
+					<p:column headerText="Valor" sortBy="produto.valor">
+						<h:outputText value="#{produto.valor}" />
+					</p:column>
+					<p:column headerText="Quantidade Estoque" sortBy="produto.quantidadeEstoque">
+						<h:outputText value="#{produto.quantidadeEstoque}" />
+					</p:column>
+					<p:column headerText="Categoria" sortBy="#{produto.produtoCategoria.nome}">
+						<h:outputText value="#{produto.produtoCategoria.nome}"/>
+					</p:column>
+					<p:column headerText="Opções">
+						<p:commandButton icon="ui-icon-trash" actionListener="#{produtoBean.excluir}" update=":msg :frmTab:table">
+							<p:confirm header="Confirmação" message="Exluir produto ?" icon="ui-icon-info" />
+							<f:attribute name="produtoExcluir" value="#{produto}"/>
+						</p:commandButton>
+						<p:commandButton icon="ui-icon-pencil" oncomplete="PF('dlg').show();" actionListener="#{produtoBean.alterar}" update=":frmCad:telaCad">
+							<f:attribute name="produtoAlterar" value="#{produto}"></f:attribute>
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+				
+				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+			        <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+			        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			    </p:confirmDialog>
+				
+			</p:panel>
+		</h:form>
+		<p:dialog header="Produtos - Cadastro" widgetVar="dlg" resizable="false" draggable="false" modal="true" closable="false">
+			<h:form id="frmCad">
+				<h:panelGrid columns="2" id="telaCad">
+					<p:outputLabel value="Nome"/>
+					<p:inputText size="30" maxlength="30" value="#{produtoBean.produto.nome}"/>
+					<p:outputLabel value="Valor"/>
+					<p:inputText size="30" maxlength="30" value="#{produtoBean.produto.valor}"/>
+					<p:outputLabel value="Quantidade Estoque"/>
+					<p:inputText size="30" maxlength="30" value="#{produtoBean.produto.quantidadeEstoque}"/>
+					<p:outputLabel value="Categoria"/>
+					<p:selectOneMenu filter="false" value="#{produtoBean.produto.produtoCategoria}" converter="omnifaces.SelectItemsConverter">
+						<f:selectItem itemLabel="Selecione uma categoria" itemValue=""/>
+						<f:selectItems value="#{produtoBean.produtoCategoriaList}" var="produtoCategoria"  itemLabel="#{produtoCategoria.nome}" itemValue="#{produtoCategoria}"/>
+					</p:selectOneMenu>
+				</h:panelGrid>
+				<h:panelGrid columns="2">
+					<p:commandButton value="Salvar" actionListener="#{produtoBean.salvar}" update=":msg :frmCad:telaCad :frmTab:table"/>
+					<p:commandButton value="Fechar" oncomplete="PF('dlg').hide();"/>
+				</h:panelGrid>
+			</h:form>
+		</p:dialog>	
+	</h:body>
+</html>

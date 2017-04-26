@@ -19,9 +19,9 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 					<p:column headerText="Nome" sortBy="produtoCategoria.nome">
 						<h:outputText value="#{produtoCategoria.nome}" />
 					</p:column>
-<!-- 					<p:column headerText="Icone" sortBy="produtoCategoria.imagem"> -->
-<!-- 						<h:outputText value="#{produtoCategoria.imagem}" /> -->
-<!-- 					</p:column> -->
+<!-- 					<h:outputLink value="DisplayImage?Image_id=#{produtoCategoria}" target="_blank" > -->
+<!--                         <h:graphicImage value="DisplayImage?Image_id=#{item.imageID}" width="50" height="50"></h:graphicImage> -->
+<!--                     </h:outputLink> -->
 					<p:column headerText="Opções">
 						<p:commandButton icon="ui-icon-trash" actionListener="#{produtoCategoriaBean.excluir}" update=":msg :frmTab:table">
 							<p:confirm header="Confirmação" message="Exluir Categoria de Produto ?" icon="ui-icon-info" />
@@ -45,8 +45,8 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 				<h:panelGrid columns="2" id="telaCad">
 					<p:outputLabel value="Nome"/>
 					<p:inputText size="30" maxlength="30" value="#{produtoCategoriaBean.produtoCategoria.nome}"/>
-<!-- 					<p:outputLabel value="Icone"/> -->
-<!-- 					<p:inputText size="30" maxlength="30" value="#{produtoCategoriaBean.produtoCategoria.imagem}"/> -->
+					<p:outputLabel value="Icone"/>
+					<p:fileUpload value="#{uploadImage.file}" mode="simple" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
 				</h:panelGrid>
 				<h:panelGrid columns="2">
 					<p:commandButton value="Salvar" actionListener="#{produtoCategoriaBean.salvar}" update=":msg :frmCad:telaCad :frmTab:table"/>
