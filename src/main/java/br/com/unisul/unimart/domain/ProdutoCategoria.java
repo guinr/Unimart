@@ -2,6 +2,7 @@ package br.com.unisul.unimart.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Lob;
 
 @SuppressWarnings("serial")
 @Entity
@@ -9,6 +10,7 @@ public class ProdutoCategoria extends GenericDomain {
 
 	@Column(length=45)
 	private String nome;
+	@Lob
 	@Column()
 	private byte[] imagem;
 

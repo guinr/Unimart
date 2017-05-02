@@ -19,9 +19,9 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 					<p:column headerText="Nome" sortBy="produtoCategoria.nome">
 						<h:outputText value="#{produtoCategoria.nome}" />
 					</p:column>
-<!-- 					<h:outputLink value="DisplayImage?Image_id=#{produtoCategoria}" target="_blank" > -->
-<!--                         <h:graphicImage value="DisplayImage?Image_id=#{item.imageID}" width="50" height="50"></h:graphicImage> -->
-<!--                     </h:outputLink> -->
+					<p:column headerText="Icone" sortBy="#{produtoCategoria.imagem}">
+						<h:graphicImage value="#{produtoCategoriaBean.getImagemBase64(produtoCategoria.imagem)}" width="50" height="50"></h:graphicImage>
+					</p:column>
 					<p:column headerText="Opções">
 						<p:commandButton icon="ui-icon-trash" actionListener="#{produtoCategoriaBean.excluir}" update=":msg :frmTab:table">
 							<p:confirm header="Confirmação" message="Exluir Categoria de Produto ?" icon="ui-icon-info" />

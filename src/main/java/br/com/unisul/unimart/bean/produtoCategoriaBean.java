@@ -1,9 +1,7 @@
 package br.com.unisul.unimart.bean;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
 import java.io.Serializable;
+import java.util.Base64;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -25,6 +23,9 @@ public class produtoCategoriaBean implements Serializable {
 	private ProdutoCategoria produtoCategoria;
 	private	List<ProdutoCategoria> produtoCategoriaList;
 	private UploadedFile file;
+	
+	@SuppressWarnings("unused")
+	private String imagemBase64;
 	
 	public ProdutoCategoria getProdutoCategoria() {
 		return produtoCategoria;
@@ -49,6 +50,14 @@ public class produtoCategoriaBean implements Serializable {
     public void setFile(UploadedFile file) {
         this.file = file;
     }
+    
+    public String getImagemBase64(byte[] imagem) {
+		return "data:image/jpg;base64," + Base64.getMimeEncoder().encodeToString(imagem);
+	}
+    
+    public void setImagemBase64(String imagemBase64) {
+		this.imagemBase64 = imagemBase64;
+	}
 	
 	@PostConstruct
 	public void listar() {
@@ -85,12 +94,8 @@ public class produtoCategoriaBean implements Serializable {
 	public void salvar() {
 		try {
 			if (file != null) {
-				File icone = new File(file.getFileName());
-			    OutputStream out = new FileOutputStream(icone);
 			    //--colocar imagem no produtoCategoria
 			    produtoCategoria.setImagem(file.getContents());
-			    out.write(file.getContents());
-			    out.close();
 			}
 			ProdutoCategoriaDao produtoCategoriaDao = new ProdutoCategoriaDao();
 			produtoCategoriaDao.merge(produtoCategoria);
