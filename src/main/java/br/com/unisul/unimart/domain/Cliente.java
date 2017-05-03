@@ -16,6 +16,9 @@ public class Cliente extends GenericDomain {
 	@Column(length=128)
 	private String senha;
 	
+	@Column(length=16)
+	private String cpf;
+	
 	public String getNome() {
 		return nome;
 	}
@@ -39,5 +42,15 @@ public class Cliente extends GenericDomain {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+	
+	
 	
 }

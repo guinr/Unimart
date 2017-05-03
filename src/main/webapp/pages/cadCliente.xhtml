@@ -19,6 +19,9 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 					<p:column headerText="Nome" sortBy="cliente.nome">
 						<h:outputText value="#{cliente.nome}" />
 					</p:column>
+					<p:column headerText="CPF" sortBy="cliente.cpf" width="128">
+						<h:outputText value="#{cliente.cpf}" />
+					</p:column>
 					<p:column headerText="Email" sortBy="cliente.email">
 						<h:outputText value="#{cliente.email}" />
 					</p:column>
@@ -47,6 +50,8 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 					<p:inputText size="30" maxlength="30" value="#{clienteBean.cliente.nome}"/>
 					<p:outputLabel value="E-mail"/>
 					<p:inputText size="30" maxlength="30" value="#{clienteBean.cliente.email}"/>
+					<p:outputLabel value="CPF"/>
+					<p:inputMask mask="999.999.999-99" value="#{clienteBean.cliente.cpf}"/>
 				</h:panelGrid>
 				<h:panelGrid columns="2">
 					<p:commandButton value="Salvar" actionListener="#{clienteBean.salvar}" update=":msg :frmCad:telaCad :frmTab:table"/>

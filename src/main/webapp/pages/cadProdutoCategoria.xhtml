@@ -44,7 +44,7 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 			<h:form id="frmCad" enctype="multipart/form-data">
 				<h:panelGrid columns="2" id="telaCad">
 					<p:outputLabel value="Nome"/>
-					<p:inputText size="30" maxlength="30" value="#{produtoCategoriaBean.produtoCategoria.nome}"/>
+					<p:inputText size="30" maxlength="30" value="#{produtoCategoriaBean.produtoCategoria.nome}" />
 					<p:outputLabel value="Icone"/>
 					<p:fileUpload value="#{produtoCategoriaBean.file}" mode="simple" skinSimple="true" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
 				</h:panelGrid>

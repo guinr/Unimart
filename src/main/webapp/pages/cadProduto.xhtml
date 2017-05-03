@@ -20,7 +20,9 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 						<h:outputText value="#{produto.nome}" />
 					</p:column>
 					<p:column headerText="Valor" sortBy="produto.valor">
-						<h:outputText value="#{produto.valor}" />
+						<h:outputText value="#{produto.valor}" >
+							<f:convertNumber pattern="R$ #,##0.00"></f:convertNumber>
+						</h:outputText>
 					</p:column>
 					<p:column headerText="Quantidade Estoque" sortBy="produto.quantidadeEstoque">
 						<h:outputText value="#{produto.quantidadeEstoque}" />
@@ -52,7 +54,9 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 					<p:outputLabel value="Nome"/>
 					<p:inputText size="30" maxlength="30" value="#{produtoBean.produto.nome}"/>
 					<p:outputLabel value="Valor"/>
-					<p:inputText size="30" maxlength="30" value="#{produtoBean.produto.valor}"/>
+					<p:inputText size="30" maxlength="30" value="#{produtoBean.produto.valor}">
+						<f:convertNumber pattern="#,##0.00"></f:convertNumber>
+					</p:inputText>
 					<p:outputLabel value="Quantidade Estoque"/>
 					<p:inputText size="30" maxlength="30" value="#{produtoBean.produto.quantidadeEstoque}"/>
 					<p:outputLabel value="Categoria"/>
