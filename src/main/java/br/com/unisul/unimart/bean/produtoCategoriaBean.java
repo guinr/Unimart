@@ -1,6 +1,9 @@
 package br.com.unisul.unimart.bean;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
+import java.nio.file.Files;
 import java.util.Base64;
 import java.util.List;
 
@@ -14,6 +17,7 @@ import org.primefaces.model.UploadedFile;
 
 import br.com.unisul.unimart.dao.ProdutoCategoriaDao;
 import br.com.unisul.unimart.domain.ProdutoCategoria;
+
 
 @SuppressWarnings("serial")
 @ManagedBean
@@ -52,7 +56,18 @@ public class produtoCategoriaBean implements Serializable {
     }
     
     public String getImagemBase64(byte[] imagem) {
-		return "data:image/jpg;base64," + Base64.getMimeEncoder().encodeToString(imagem);
+    	if(imagem!=null){
+    		return "data:image/jpg;base64," + Base64.getMimeEncoder().encodeToString(imagem);
+    	}
+    	else{
+    		File f = new File("/src/img/SemImagem.png");
+    		try {
+				imagem = Files.readAllBytes(f.toPath());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+    		return "data:image/jpg;base64," + Base64.getMimeEncoder().encodeToString(imagem);
+    	}
 	}
     
     public void setImagemBase64(String imagemBase64) {
@@ -69,6 +84,7 @@ public class produtoCategoriaBean implements Serializable {
 			e.printStackTrace();
 		}
 	}
+
 	
 	public void novo() {
 		produtoCategoria = new ProdutoCategoria();
@@ -93,9 +109,19 @@ public class produtoCategoriaBean implements Serializable {
 	
 	public void salvar() {
 		try {
-			if (file != null) {
+			if (!file.getFileName().equals("")) {
 			    //--colocar imagem no produtoCategoria
 			    produtoCategoria.setImagem(file.getContents());
+			}else{
+				//--se não tiver imagem selecionada cadastra uma imagem padrao
+				//--Alterar para pegar caminho relativo
+				//--Atualizaaaa
+				File f = new File("C:\\Users\\heto1\\git\\Unimart\\src\\img\\SemImagem.png");
+	    		try {
+					produtoCategoria.setImagem(Files.readAllBytes(f.toPath()));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 			ProdutoCategoriaDao produtoCategoriaDao = new ProdutoCategoriaDao();
 			produtoCategoriaDao.merge(produtoCategoria);
