@@ -115,7 +115,7 @@ public class produtoCategoriaBean implements Serializable {
 			}else{
 				//--se não tiver imagem selecionada cadastra uma imagem padrao
 				//--Alterar para pegar caminho relativo
-				//--Atualizaaa
+				//--Atualiza
 				File f = new File("C:\\Users\\heto1\\git\\Unimart\\src\\img\\SemImagem.png");
 	    		try {
 					produtoCategoria.setImagem(Files.readAllBytes(f.toPath()));
