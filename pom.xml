@@ -28,6 +28,15 @@
   		</plugin>
   	</plugins>
   </build>
+
+	<!-- Repositorio PrimeFaces   -->
+	<repositories>
+		<repository>
+			<id>prime-repo</id>
+			<name>Prime Repo</name>
+			<url>http://repository.primefaces.org</url>
+		</repository>
+	</repositories>
   
   <dependencies>
   	<!-- HIBERNATE -->
@@ -47,6 +56,12 @@
 		<groupId>org.primefaces</groupId>
 		<artifactId>primefaces</artifactId>
 		<version>5.2</version>
+	</dependency>
+	
+	<dependency>
+		<groupId>org.primefaces.themes</groupId>
+		<artifactId>flick</artifactId>
+		<version>1.0.6</version>
 	</dependency>
 	<!-- OMNIFACES -->
 	<dependency>

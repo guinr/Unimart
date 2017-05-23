@@ -1,6 +1,7 @@
 package br.com.unisul.unimart.bean;
 
 import java.io.Serializable;
+import java.util.Base64;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -47,6 +48,10 @@ public class produtoBean implements Serializable {
 
 	public void setProdutoCategoriaList(List<ProdutoCategoria> ProdutoCategoriaList) {
 		this.produtoCategoriaList = ProdutoCategoriaList;
+	}
+	
+	public String getImagemBase64(byte[] imagem) {
+		return "data:image/jpg;base64," + Base64.getMimeEncoder().encodeToString(imagem);
 	}
 	
 	// Produto

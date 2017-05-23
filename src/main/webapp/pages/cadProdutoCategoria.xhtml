@@ -11,7 +11,7 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 	<h:body>
 		<p:growl id="msg"/>
 		<h:form id="frmTab">
-			<p:panel header="ProdutoCategoria">
+			<p:panel header="Categoria de Produto">
 				<p:dataTable id="table" emptyMessage="Sem Registros" paginator="true" value="#{produtoCategoriaBean.produtoCategoriaList}" var="produtoCategoria">
 					<f:facet name="header">
 						<p:commandButton value="Novo" actionListener="#{produtoCategoriaBean.novo}" oncomplete="PF('dlg').show()" update=":frmCad:telaCad"></p:commandButton>
@@ -40,7 +40,7 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 				
 			</p:panel>
 		</h:form>
-		<p:dialog header="Condicao de Pagamento - Cadastro" widgetVar="dlg" resizable="false" draggable="false" modal="true" closable="false">
+		<p:dialog header="Categoria de Produto - Cadastro" widgetVar="dlg" resizable="false" draggable="false" modal="true" closable="false">
 			<h:form id="frmCad" enctype="multipart/form-data">
 				<h:panelGrid columns="2" id="telaCad">
 					<p:outputLabel value="Nome"/>

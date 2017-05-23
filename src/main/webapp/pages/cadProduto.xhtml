@@ -27,8 +27,11 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 					<p:column headerText="Quantidade Estoque" sortBy="produto.quantidadeEstoque">
 						<h:outputText value="#{produto.quantidadeEstoque}" />
 					</p:column>
-					<p:column headerText="Categoria" sortBy="#{produto.produtoCategoria.nome}">
-						<h:outputText value="#{produto.produtoCategoria.nome}"/>
+					<p:column headerText="Categoria" sortBy="#{produto.produtoCategoria.nome}" width="100" >
+						<p:panel style=" border: none; width:100%; display:flex; justify-content:center; "  >
+							<h:graphicImage value="#{produtoCategoriaBean.getImagemBase64(produto.produtoCategoria.imagem)}" width="50" height="50"></h:graphicImage>
+ 							<h:outputText value="#{produto.produtoCategoria.nome}"/> 
+						</p:panel>
 					</p:column>
 					<p:column headerText="Opções">
 						<p:commandButton icon="ui-icon-trash" actionListener="#{produtoBean.excluir}" update=":msg :frmTab:table">
