@@ -28,7 +28,8 @@
   		</plugin>
   	</plugins>
   </build>
-  
+
+	<!-- Repositorio PrimeFaces   -->
 	<repositories>
 		<repository>
 			<id>prime-repo</id>
