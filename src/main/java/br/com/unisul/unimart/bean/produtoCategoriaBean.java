@@ -112,7 +112,7 @@ public class produtoCategoriaBean implements Serializable {
 			if (!file.getFileName().equals("")) {
 			    //--colocar imagem no produtoCategoria
 			    produtoCategoria.setImagem(file.getContents());
-			}else{
+			} else {
 				//--se não tiver imagem selecionada cadastra uma imagem padrao
 				//--Alterar para pegar caminho relativo
 				//--Atualizaa
