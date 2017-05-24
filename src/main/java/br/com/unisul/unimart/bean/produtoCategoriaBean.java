@@ -19,6 +19,8 @@ import br.com.unisul.unimart.dao.ProdutoCategoriaDao;
 import br.com.unisul.unimart.domain.ProdutoCategoria;
 
 
+
+
 @SuppressWarnings("serial")
 @ManagedBean
 @ViewScoped
@@ -56,18 +58,7 @@ public class produtoCategoriaBean implements Serializable {
     }
     
     public String getImagemBase64(byte[] imagem) {
-    	if(imagem!=null){
-    		return "data:image/jpg;base64," + Base64.getMimeEncoder().encodeToString(imagem);
-    	}
-    	else{
-    		File f = new File("/src/img/SemImagem.png");
-    		try {
-				imagem = Files.readAllBytes(f.toPath());
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-    		return "data:image/jpg;base64," + Base64.getMimeEncoder().encodeToString(imagem);
-    	}
+		return "data:image/jpg;base64," + Base64.getMimeEncoder().encodeToString(imagem);
 	}
     
     public void setImagemBase64(String imagemBase64) {
