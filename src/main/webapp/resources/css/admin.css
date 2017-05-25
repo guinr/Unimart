@@ -1,0 +1,24 @@
+.ui-menu {
+	margin-bottom: 15px;
+}
+.ui-menuitem-link {
+	margin: 2px !important;
+	border-bottom: 2px solid #0073EA !important;
+}
+.categoria {
+	width: 190px;
+}
+.categoria > .ui-panel > .ui-panel-content {
+	display: flex;
+    align-items: center;
+}
+.categoria > .ui-panel > .ui-panel-content > img {
+	margin-right: 10px;
+}
+.list-icon {
+	width: 70px;
+	text-align: center;
+}
+.opcoes {
+	width: 90px;
+}
