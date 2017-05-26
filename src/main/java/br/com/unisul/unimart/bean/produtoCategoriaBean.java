@@ -58,6 +58,7 @@ public class produtoCategoriaBean implements Serializable {
     }
     
     public String getImagemBase64(byte[] imagem) {
+    	if (imagem == null) return null;
 		return "data:image/jpg;base64," + Base64.getMimeEncoder().encodeToString(imagem);
 	}
     
@@ -79,6 +80,8 @@ public class produtoCategoriaBean implements Serializable {
 	
 	public void novo() {
 		produtoCategoria = new ProdutoCategoria();
+		file = null;
+		imagemBase64 = null;
 	}
 	
 	public void excluir(ActionEvent event) {
