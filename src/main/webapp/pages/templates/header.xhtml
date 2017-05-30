@@ -7,6 +7,25 @@ xmlns:f="http://xmlns.jcp.org/jsf/core"
 xmlns:ui="http://java.sun.com/jsf/facelets">
 	<body>
 		<ui:composition>
+		<p:growl id="msg"/>
+		<p:dialog header="Login" widgetVar="dlg1" resizable="false" draggable="false" modal="true" closable="false">
+					<h:form id="frmLog" >
+						<h:panelGrid columns="2" id="telaLog">
+							<p:outputLabel value="E-mail"/>
+							<p:inputText label="Email" id="emailLogin" size="30" maxlength="30" value="#{loginBean.cliente.email}" validatorMessage="Email Inválido" required="true" requiredMessage="Informe o email">
+								<f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]"></f:validateRegex>
+								<p:ajax update=":msg :frmLog:telaLog" event="change" />
+							</p:inputText>
+							<p:outputLabel value="Senha" />
+							<p:password label="Senha" id="senhaLogin"  size="30" value="#{loginBean.cliente.senha}"  requiredMessage="Informe a senha"/>
+						</h:panelGrid>
+						<h:panelGrid columns="2">
+							<p:commandButton value="Entrar" actionListener="#{loginBean.doLogin}" oncomplete="PF('dlg1').hide()" update=":msg :frmLog:telaLog"/>
+							<p:commandButton value="Cancelar" actionListener="#{loginBean.cancelar}"  onclick="PF('dlg1').hide()" update=":msg :frmLog:telaLog"/>
+						</h:panelGrid>
+					</h:form>
+				</p:dialog>
+			<h:form id="frmMenu">
 			<p:menubar>
 				<p:menuitem value="Início" url="/pages/admin/index.xhtml"></p:menuitem>
 				<p:menuitem value="Produtos" url="/pages/admin/cadProduto.xhtml"></p:menuitem>
@@ -14,7 +33,9 @@ xmlns:ui="http://java.sun.com/jsf/facelets">
 				<p:menuitem value="Categoria de Produto" url="/pages/admin/cadProdutoCategoria.xhtml"></p:menuitem>
 				<p:menuitem value="Condicoes de Pagamento" url="/pages/admin/cadCondicaoPagamento.xhtml"></p:menuitem>
 				<p:menuitem value="Status de Pedido" url="/pages/admin/cadStatusPedido.xhtml"></p:menuitem>
+				<p:menuitem value="Entrar" styleClass="entrar" actionListener="#{loginBean.novo()}" oncomplete="PF('dlg1').show()" update=":frmLog:telaLog"></p:menuitem>
 			</p:menubar>
+			</h:form>
 		</ui:composition>
 	</body>
 </html>

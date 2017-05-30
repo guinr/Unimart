@@ -19,6 +19,9 @@ public class Cliente extends GenericDomain {
 	@Column(length=16)
 	private String cpf;
 	
+	@Column
+	private Boolean admin;
+	
 	public String getNome() {
 		return nome;
 	}
@@ -50,7 +53,13 @@ public class Cliente extends GenericDomain {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-	
-	
+
+	public Boolean getAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(Boolean admin) {
+		this.admin = admin;
+	}
 	
 }

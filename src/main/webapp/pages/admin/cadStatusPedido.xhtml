@@ -8,7 +8,7 @@ xmlns:ui="http://java.sun.com/jsf/facelets">
 	<h:body>
 		<ui:composition template="/pages/templates/template.xhtml">	
 			<ui:define name="content">
-				<p:growl id="msg"/>
+				
 				<h:form id="frmTab">
 					<p:panel header="StatusPedido">
 						<p:dataTable id="table" emptyMessage="Sem Registros" paginator="true" value="#{statusPedidoBean.statusPedidoList}" var="statusPedido">
