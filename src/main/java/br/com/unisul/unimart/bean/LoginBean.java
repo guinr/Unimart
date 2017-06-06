@@ -5,24 +5,23 @@ import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.servlet.ServletRequest;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.omnifaces.util.Messages;
 
 import br.com.unisul.unimart.dao.ClienteDao;
 import br.com.unisul.unimart.domain.Cliente;
+import br.com.unisul.unimart.util.SessionContext;
 
 @SuppressWarnings("serial")
 @ManagedBean
-@SessionScoped	
+@SessionScoped
 public class LoginBean implements Serializable {
-	
-	
+
 	private Cliente clienteLogado;
 	private Cliente cliente;
-	
+	private Boolean logado;
+
 	public Cliente getClienteLogado() {
 		return clienteLogado;
 	}
@@ -39,34 +38,50 @@ public class LoginBean implements Serializable {
 		this.cliente = cliente;
 	}
 
-	public void novo(){
+	public Boolean getLogado() {
+		return logado;
+	}
+
+	public void setLogado(Boolean logado) {
+		this.logado = logado;
+	}
+
+	public void novo() {
 		cliente = new Cliente();
 	}
-	
-	public void cancelar(){
+
+	public void cancelar() {
 		cliente = null;
 	}
-	
+
 	public String doLogin() {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
-		
+
 		HttpSession sess = (HttpSession) facesContext.getExternalContext().getSession(true);
-		
+
 		ClienteDao c = new ClienteDao();
 		clienteLogado = c.listarPorEmailSenha(cliente.getEmail(), cliente.getSenha());
-		
+
 		if (clienteLogado == null) {
 			FacesContext.getCurrentInstance().validationFailed();
 			Messages.addGlobalError("Erro ao efetuar login");
-			return sess.getAttribute("currentPage").toString();
+			return "";
 		}
-		
-		sess.setAttribute("user", clienteLogado.getNome());
-		System.out.println(sess.getAttribute("user").toString());
-		sess.setAttribute("admin", clienteLogado.getAdmin());
-		Messages.addGlobalInfo("Login efetuado com sucesso");
-		return sess.getAttribute("lastPage").toString();
 
+		sess.setAttribute("user", clienteLogado);
+		Cliente user = (Cliente) sess.getAttribute("user");
+		sess.setAttribute("adm", (Boolean) clienteLogado.getAdmin());
+		System.out.println(user.getNome()+" Logado");
+		setLogado(true);
+		Messages.addGlobalInfo("Login efetuado com sucesso");
+		return sess.getAttribute("currentPage").toString() + "?faces-redirect=true";
+
+	}
+
+	public String doLogout() {
+		SessionContext.getInstance().encerrarSessao();
+		Messages.addGlobalInfo("Logout realizado com sucesso !");
+		return "/login.xhtml?faces-redirect=true";
 	}
 
 }

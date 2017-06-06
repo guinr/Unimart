@@ -22,13 +22,23 @@
 	<!-- Filtro para monitorar as paginas acessadas -->
 	<filter>
 		<filter-name>PageFilter</filter-name>
-		<filter-class>br.com.unisul.unimart.util.PageFilter</filter-class>
+		<filter-class>br.com.unisul.unimart.filter.PageFilter</filter-class>
 	</filter>
 
-	<!-- Quais paginas o filtro vai monitorar -->
+	<!-- Quais paginas o filtro vai monitorar -TODAS- -->
 	<filter-mapping>
 		<filter-name>PageFilter</filter-name>
 		<url-pattern>/pages/*</url-pattern>
+	</filter-mapping>
+
+	<!-- login filter -->
+	<filter>
+		<filter-name>LoginFilter</filter-name>
+		<filter-class>br.com.unisul.unimart.filter.LoginFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>LoginFilter</filter-name>
+		<url-pattern>/pages/admin/*</url-pattern>
 	</filter-mapping>
 
 	<!-- Time-out da sessao -->
