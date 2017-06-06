@@ -26,12 +26,12 @@ xmlns:ui="http://java.sun.com/jsf/facelets">
 								<h:outputText value="#{produtoCategoria.nome}" />
 							</p:column>
 							<p:column class="opcoes" headerText="Opções">
+								<p:commandButton icon="ui-icon-pencil" oncomplete="PF('dlg').show();" actionListener="#{produtoCategoriaBean.alterar}" update=":frmCad:telaCad">
+									<f:attribute name="produtoCategoriaAlterar" value="#{produtoCategoria}"></f:attribute>
+								</p:commandButton>
 								<p:commandButton icon="ui-icon-trash" actionListener="#{produtoCategoriaBean.excluir}" update=":msg :frmTab:table">
 									<p:confirm header="Confirmação" message="Exluir Categoria de Produto ?" icon="ui-icon-info" />
 									<f:attribute name="produtoCategoriaExcluir" value="#{produtoCategoria}"/>
-								</p:commandButton>
-								<p:commandButton icon="ui-icon-pencil" oncomplete="PF('dlg').show();" actionListener="#{produtoCategoriaBean.alterar}" update=":frmCad:telaCad">
-									<f:attribute name="produtoCategoriaAlterar" value="#{produtoCategoria}"></f:attribute>
 								</p:commandButton>
 							</p:column>
 						</p:dataTable>
