@@ -1,6 +1,5 @@
 package br.com.unisul.unimart.bean;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -16,7 +15,7 @@ import br.com.unisul.unimart.domain.CondicaoPagamento;
 @SuppressWarnings("serial")
 @ManagedBean
 @ViewScoped
-public class condicaoPagamentoBean implements Serializable {
+public class CondicaoPagamentoBean extends GenericBean {
 	
 	private CondicaoPagamento condicaoPagamento;
 	private	List<CondicaoPagamento> condicaoPagamentoList;

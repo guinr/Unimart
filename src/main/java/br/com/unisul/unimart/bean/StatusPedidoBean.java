@@ -1,6 +1,5 @@
 package br.com.unisul.unimart.bean;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -16,7 +15,7 @@ import br.com.unisul.unimart.domain.StatusPedido;
 @SuppressWarnings("serial")
 @ManagedBean
 @ViewScoped
-public class statusPedidoBean implements Serializable {
+public class StatusPedidoBean extends GenericBean {
 	
 	private StatusPedido statusPedido;
 	private	List<StatusPedido> statusPedidoList;

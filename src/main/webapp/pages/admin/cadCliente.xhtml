@@ -12,10 +12,10 @@
 			<h:form id="frmTab">
 				<p:panel header="Cliente">
 					<p:dataTable id="table" emptyMessage="Sem Registros"
-						paginator="true" value="#{ClienteBean.clienteList}" var="cliente">
+						paginator="true" value="#{clienteBean.clienteList}" var="cliente">
 						<f:facet name="header">
 							<p:commandButton value="Novo"
-								actionListener="#{ClienteBean.novo}"
+								actionListener="#{clienteBean.novo}"
 								oncomplete="PF('dlg').show()" update=":frmCad:telaCad"></p:commandButton>
 						</f:facet>
 						<p:column headerText="Nome" sortBy="cliente.nome">
@@ -30,11 +30,11 @@
 						<p:column class="opcoes" headerText="Opções">
 							<p:commandButton icon="ui-icon-pencil"
 								oncomplete="PF('dlg').show();"
-								actionListener="#{ClienteBean.alterar}" update=":frmCad:telaCad">
+								actionListener="#{clienteBean.alterar}" update=":frmCad:telaCad">
 								<f:attribute name="clienteAlterar" value="#{cliente}"></f:attribute>
 							</p:commandButton>
 							<p:commandButton icon="ui-icon-trash"
-								actionListener="#{ClienteBean.excluir}"
+								actionListener="#{clienteBean.excluir}"
 								update=":msg :frmTab:table">
 								<p:confirm header="Confirmação" message="Exluir Cliente ?"
 									icon="ui-icon-info" />
@@ -58,30 +58,30 @@
 					<h:panelGrid columns="2" id="telaCad">
 						<p:outputLabel value="Nome" />
 						<p:inputText label="Nome" id="nome" size="30" maxlength="30"
-							value="#{ClienteBean.cliente.nome}" required="true" >
+							value="#{clienteBean.cliente.nome}" required="true" >
 							<p:ajax update=":msg :frmCad:telaCad :frmTab:table" />
 							</p:inputText>
 						<p:outputLabel value="E-mail" />
 						<p:inputText label="Email" validatorMessage="Email Inválido" id="email" size="30" maxlength="30"
-							value="#{ClienteBean.cliente.email}" required="true" >
+							value="#{clienteBean.cliente.email}" required="true" >
 							<f:validateRegex
 								pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" ></f:validateRegex>
 							<p:ajax update=":msg :frmCad:telaCad :frmTab:table" event="change" />
 						</p:inputText>
 						<p:outputLabel value="Senha" />
 						<p:password feedback="true" size="30"
-							value="#{ClienteBean.cliente.senha}"
+							value="#{clienteBean.cliente.senha}"
 							promptLabel="Insira uma Senha" weakLabel="Fraco"
 							goodLabel="Medio" strongLabel="Forte" />
 						<p:outputLabel value="CPF" />
 						<p:inputMask mask="999.999.999-99"
-							value="#{ClienteBean.cliente.cpf}" />
+							value="#{clienteBean.cliente.cpf}" />
 							<p:outputLabel value="Administrador" />
-							<p:selectBooleanButton id="value1" value="#{ClienteBean.cliente.admin}" onLabel="Sim" offLabel="Não" style="width:60px" />
+							<p:selectBooleanButton id="value1" value="#{clienteBean.cliente.admin}" onLabel="Sim" offLabel="Não" style="width:60px" />
 					</h:panelGrid>
 					<h:panelGrid columns="2">
 						<p:commandButton value="Salvar"
-							actionListener="#{ClienteBean.salvar}"
+							actionListener="#{clienteBean.salvar}"
 							update=":msg :frmCad:telaCad :frmTab:table" />
 						<p:commandButton value="Fechar" oncomplete="PF('dlg').hide();" />
 					</h:panelGrid>

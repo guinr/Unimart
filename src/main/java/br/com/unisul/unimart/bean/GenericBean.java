@@ -5,9 +5,9 @@ import java.util.Base64;
 
 import org.primefaces.model.UploadedFile;
 
-@SuppressWarnings("serial")
 public abstract class GenericBean implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
 	protected UploadedFile file;
 	
 	// Gets e Sets

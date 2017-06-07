@@ -18,7 +18,7 @@ import br.com.unisul.unimart.domain.ProdutoCategoria;
 @SuppressWarnings("serial")
 @ManagedBean
 @ViewScoped
-public class produtoCategoriaBean extends GenericBean {
+public class ProdutoCategoriaBean extends GenericBean {
 	
 	private ProdutoCategoria produtoCategoria;
 	private	List<ProdutoCategoria> produtoCategoriaList;

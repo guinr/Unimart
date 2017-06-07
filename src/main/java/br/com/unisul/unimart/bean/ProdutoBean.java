@@ -1,6 +1,5 @@
 package br.com.unisul.unimart.bean;
 
-import java.io.Serializable;
 import java.util.Base64;
 import java.util.List;
 
@@ -19,7 +18,7 @@ import br.com.unisul.unimart.domain.ProdutoCategoria;
 @SuppressWarnings("serial")
 @ManagedBean
 @ViewScoped
-public class produtoBean implements Serializable {
+public class ProdutoBean extends GenericBean {
 	
 	private Produto produto;
 	private	List<Produto> produtoList;

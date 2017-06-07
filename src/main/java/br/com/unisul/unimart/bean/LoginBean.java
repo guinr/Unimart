@@ -1,7 +1,5 @@
 package br.com.unisul.unimart.bean;
 
-import java.io.Serializable;
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -16,7 +14,7 @@ import br.com.unisul.unimart.util.SessionContext;
 @SuppressWarnings("serial")
 @ManagedBean
 @SessionScoped
-public class LoginBean implements Serializable {
+public class LoginBean extends GenericBean {
 
 	private Cliente clienteLogado;
 	private Cliente cliente;
@@ -51,7 +49,7 @@ public class LoginBean implements Serializable {
 	}
 
 	public void cancelar() {
-		cliente = null;
+		novo();
 	}
 
 	public String doLogin() {

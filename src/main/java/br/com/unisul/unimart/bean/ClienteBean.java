@@ -1,6 +1,5 @@
 package br.com.unisul.unimart.bean;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -16,7 +15,7 @@ import br.com.unisul.unimart.domain.Cliente;
 @SuppressWarnings("serial")
 @ManagedBean
 @ViewScoped
-public class clienteBean implements Serializable {
+public class ClienteBean extends GenericBean {
 	
 	private Cliente cliente;
 	private	List<Cliente> clienteList;
@@ -40,6 +39,7 @@ public class clienteBean implements Serializable {
 	@PostConstruct
 	public void listar() {
 		try {
+			novo();
 			ClienteDao clienteDao = new ClienteDao();
 			clienteList = clienteDao.listarTodos();
 		} catch (Exception e) {
