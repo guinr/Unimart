@@ -1,0 +1,69 @@
+.list-produto {
+	display: flex;
+	width: 100%;
+	border: 0 !important;
+	padding: 0 !important;
+}
+.list-produto > .ui-panel-content {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	width: 100%;
+	padding: 0 !important;
+}
+.produto {
+	position: relative;
+	display: inline-block;
+	width: 10%;
+	min-width: 190px;
+	border: 1px solid #ededed;
+	margin: 0px 5px 5px 5px;
+}
+.produto > .descricao {
+	font-size: 20px;
+	margin-top: 10px;
+	text-align: center !important;
+}
+.produto > .preco {
+	margin: 5px 0;
+	text-align: center;
+	font-size: 18px;
+	color: #aaa;
+}
+.produto > .imagem {
+	height: 100px;
+	width: 100%;
+	margin: 25px 0 15px 0;
+	text-align: center;
+}
+.produto > .imagem > img {
+	height: 100%;
+}
+.produto > .acao {
+	width: 100%;
+	display: inline-block;
+	text-align: center;
+	background-color: rgba(255, 255, 255, 0.9);
+}
+.produto > .acao > .adicionar {
+	display: inline-block;
+	margin-bottom: 15px;
+	line-height: 26px;
+	font-size: 16px;
+	color: rgba(76, 175, 80, 1);
+	padding: 10px;
+	border: 1px solid rgba(76, 175, 80, 1);
+	transition: all 0.2s;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+.produto > .acao > .adicionar:hover {
+	color: #fff;
+	background-color: rgba(76, 175, 80, 1);
+}
+.produto > .acao > .adicionar:active {
+	background-color: rgba(56, 142, 60, 1);
+}
