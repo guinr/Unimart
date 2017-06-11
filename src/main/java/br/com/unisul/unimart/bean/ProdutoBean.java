@@ -23,6 +23,7 @@ public class ProdutoBean extends GenericBean {
 	private Produto produto;
 	private	List<Produto> produtoList;
 	private List<ProdutoCategoria> produtoCategoriaList;
+	private Integer codigoCategoriaAtual;
 	
 	//Gets, Sets
 	public Produto getProduto() {
@@ -60,8 +61,27 @@ public class ProdutoBean extends GenericBean {
 			ProdutoDao produtoDao = new ProdutoDao();
 			produtoList = produtoDao.listarTodos();
 		} catch (Exception e) {
-			Messages.addGlobalError("Erro ao listar produto");
+			Messages.addGlobalError("Erro ao listar produtos");
 			e.printStackTrace();
+		}
+	}
+	
+	public void listarByCategoria(Integer codigo) {
+		if (codigo == null) {
+			listar();
+		} else {
+			if (codigo != codigoCategoriaAtual) {
+				try {
+					ProdutoDao produtoDao = new ProdutoDao();
+					ProdutoCategoria cat = new ProdutoCategoria();
+					cat.setCodigo(codigo);
+					produtoList = produtoDao.listarPorCategoria(cat);
+					codigoCategoriaAtual = codigo;
+				} catch (Exception e) {
+					Messages.addGlobalError("Erro ao listar produtos");
+					e.printStackTrace();
+				}
+			}
 		}
 	}
 	

@@ -49,7 +49,6 @@ public class ProdutoCategoriaBean extends GenericBean {
 			e.printStackTrace();
 		}
 	}
-
 	
 	public void novo() {
 		produtoCategoria = new ProdutoCategoria();

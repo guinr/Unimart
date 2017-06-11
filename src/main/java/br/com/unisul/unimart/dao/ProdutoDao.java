@@ -13,7 +13,7 @@ import br.com.unisul.unimart.util.HibernateUtil;
 public class ProdutoDao extends GenericDao<Produto> {
 	
 	@SuppressWarnings("unchecked")
-	public List<Produto> listarPorCategoria(ProdutoCategoria cat){
+	public List<Produto> listarPorCategoria(ProdutoCategoria cat) {
 		Session sessao = HibernateUtil.getFabricaDeSessoes().openSession();
 		try {
 			Criteria consulta = sessao.createCriteria(Produto.class);
@@ -22,7 +22,7 @@ public class ProdutoDao extends GenericDao<Produto> {
 			return resultado;
 		} catch (Exception e) {
 			throw(e);
-		}finally{
+		} finally {
 			sessao.close();
 		}
 	}
