@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:body>
+	<ui:composition>
+		<p:panel class="list-produto">
+			<ui:repeat value="#{produtoBean.produtoList}" var="produto">
+				<div class="produto">
+					<div class="descricao">
+						<p:outputLabel value="#{produto.nome}"></p:outputLabel>
+					</div>
+					<div class="preco">
+						<h:outputText value="#{produto.valor}">
+							<f:convertNumber pattern="R$ #,##0.00"></f:convertNumber>
+						</h:outputText>
+					</div>
+					<div class="imagem">
+						<h:graphicImage title="#{produto.nome}"
+							value="#{produtoBean.getImagemBase64(produto.produtoCategoria.imagem)}"></h:graphicImage>
+					</div>
+					<div class="acao">
+						<div class="controle-quantidade">
+							<p:spinner id="minMax" value="#{produto.quantidade}" min="0" max="9999" />
+						</div>
+						<span class="adicionar">Adicionar ao carrinho</span>
+					</div>
+				</div>
+			</ui:repeat>
+		</p:panel>
+	</ui:composition>
+</h:body>
+</html>

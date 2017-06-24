@@ -9,18 +9,29 @@
 	<ui:composition>
 		<h:form id="frmMenu">
 			<p:panelGrid>
-				<div class="menu-logo">
-					<h:outputLink value="/Unimart/pages/public/index.xhtml">
-						<h:graphicImage value="/resources/img/logo.png" />
-					</h:outputLink>
+				<div class="menu">
+					<div class="menu-logo">
+						<h:outputLink value="/Unimart/pages/public/index.xhtml">
+							<h:graphicImage value="/resources/img/logo.png" />
+						</h:outputLink>
+					</div>
+					<div class="menu-cart">
+						<h:outputLink value="/Unimart/pages/public/cart.xhtml">
+							<i class="fa fa-shopping-cart"></i>
+						</h:outputLink>
+					</div>
 				</div>
 			</p:panelGrid>
 			<p:panel class="menu-bar">
-				<ui:repeat value="#{produtoCategoriaBean.produtoCategoriaList}" var="categoria">
-					<h:commandLink action="#{produtoBean.listarByCategoria(categoria.codigo)}">
+				<ui:repeat value="#{produtoCategoriaBean.produtoCategoriaList}"
+					var="categoria">
+					<h:commandLink
+						action="#{produtoBean.listarByCategoria(categoria.codigo)}">
 						<div class="menu-item">
-							<h:graphicImage title="#{categoria.nome}" value="#{produtoCategoriaBean.getImagemBase64(categoria.imagem)}" width="40" height="40"></h:graphicImage>
-							<p:outputLabel value="#{categoria.nome}"></p:outputLabel>				
+							<h:graphicImage title="#{categoria.nome}"
+								value="#{produtoCategoriaBean.getImagemBase64(categoria.imagem)}"
+								width="40" height="40"></h:graphicImage>
+							<p:outputLabel value="#{categoria.nome}"></p:outputLabel>
 						</div>
 					</h:commandLink>
 				</ui:repeat>

@@ -3,6 +3,7 @@ package br.com.unisul.unimart.domain;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
 @SuppressWarnings("serial")
@@ -15,9 +16,14 @@ public class Produto extends GenericDomain {
 	private Double valor;
 	@Column()
 	private Double quantidadeEstoque;
+	@Lob
+	@Column()
+	private byte[] imagem;
 	@ManyToOne
 	@JoinColumn(nullable = false)
 	private ProdutoCategoria produtoCategoria;
+	
+	private Integer quantidade;
 
 	public String getNome() {
 		return nome;
@@ -43,12 +49,29 @@ public class Produto extends GenericDomain {
 		this.quantidadeEstoque = quantidadeEstoque;
 	}
 	
+	public byte[] getImagem() {
+		return imagem;
+	}
+
+	public void setImagem(byte[] imagem) {
+		this.imagem = imagem;
+	}
+	
 	public ProdutoCategoria getProdutoCategoria() {
 		return produtoCategoria;
 	}
 
 	public void setProdutoCategoria(ProdutoCategoria produtoCategoria) {
 		this.produtoCategoria = produtoCategoria;
+	}
+
+	public Integer getQuantidade() {
+		if (quantidade == null) quantidade = 0;
+		return quantidade;
+	}
+
+	public void setQuantidade(Integer quantidade) {
+		this.quantidade = quantidade;
 	}
 	
 }
