@@ -18,6 +18,8 @@ public class LoginBean extends GenericBean {
 
 	private Cliente clienteLogado;
 	private Cliente cliente;
+	private String email;
+	private String senha;
 	private Boolean logado;
 
 	public Cliente getClienteLogado() {
@@ -34,6 +36,22 @@ public class LoginBean extends GenericBean {
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 	public Boolean getLogado() {
@@ -58,27 +76,27 @@ public class LoginBean extends GenericBean {
 		HttpSession sess = (HttpSession) facesContext.getExternalContext().getSession(true);
 
 		ClienteDao c = new ClienteDao();
-		clienteLogado = c.listarPorEmailSenha(cliente.getEmail(), cliente.getSenha());
+		clienteLogado = c.listarPorEmailSenha(getEmail(), getSenha());
 
 		if (clienteLogado == null) {
 			FacesContext.getCurrentInstance().validationFailed();
-			Messages.addGlobalError("Erro ao efetuar login");
+			Messages.addGlobalError("Erro ao efetuar login"); 
 			return "";
 		}
 
 		sess.setAttribute("user", clienteLogado);
 		Cliente user = (Cliente) sess.getAttribute("user");
 		sess.setAttribute("adm", (Boolean) clienteLogado.getAdmin());
-		System.out.println(user.getNome()+" Logado");
+		System.out.println(user.getNome() + " Logado");
 		setLogado(true);
 		Messages.addGlobalInfo("Login efetuado com sucesso");
-		return sess.getAttribute("currentPage").toString() + "?faces-redirect=true";
+		return sess.getAttribute("lastPage").toString() + "?faces-redirect=true";
 
 	}
 
 	public String doLogout() {
 		SessionContext.getInstance().encerrarSessao();
-		Messages.addGlobalInfo("Logout realizado com sucesso !");
+		Messages.addGlobalInfo("Logout realizado com sucesso!");
 		return "/login.xhtml?faces-redirect=true";
 	}
 
