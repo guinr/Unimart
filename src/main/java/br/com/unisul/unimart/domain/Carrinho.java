@@ -1,21 +1,23 @@
 package br.com.unisul.unimart.domain;
 
-import java.util.List;
-
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @SuppressWarnings("serial")
 @Entity
 public class Carrinho extends GenericDomain {
 	
-	private List<ItemCarrinho> itemCarrinhoList;
+	@ManyToOne
+	@JoinColumn(nullable = true)
+	private CondicaoPagamento condicaoPagamento;
 
-	public List<ItemCarrinho> getItemCarrinhoList() {
-		return itemCarrinhoList;
+	public CondicaoPagamento getCondicaoPagamento() {
+		return condicaoPagamento;
 	}
 
-	public void setItemCarrinhoList(List<ItemCarrinho> itemCarrinhoList) {
-		this.itemCarrinhoList = itemCarrinhoList;
+	public void setCondicaoPagamento(CondicaoPagamento condicaoPagamento) {
+		this.condicaoPagamento = condicaoPagamento;
 	}
 
 }

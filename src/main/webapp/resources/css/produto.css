@@ -45,9 +45,9 @@
 	text-align: center;
 	background-color: rgba(255, 255, 255, 0.9);
 }
-.produto > .acao > .adicionar {
+.adicionar {
 	display: inline-block;
-	margin-bottom: 15px;
+	margin: 15px 0;
 	line-height: 26px;
 	font-size: 16px;
 	color: rgba(76, 175, 80, 1);
@@ -60,10 +60,10 @@
 	-ms-user-select: none;
 	user-select: none;
 }
-.produto > .acao > .adicionar:hover {
+.adicionar:hover {
 	color: #fff;
 	background-color: rgba(76, 175, 80, 1);
 }
-.produto > .acao > .adicionar:active {
+.adicionar:active {
 	background-color: rgba(56, 142, 60, 1);
 }

@@ -7,7 +7,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:body>
 	<ui:composition>
-		<p:panel class="list-produto">
+		<p:panel class="list-produto" id="frmProduto">
 			<ui:repeat value="#{produtoBean.produtoList}" var="produto">
 				<div class="produto">
 					<div class="descricao">
@@ -19,14 +19,19 @@
 						</h:outputText>
 					</div>
 					<div class="imagem">
-						<h:graphicImage title="#{produto.nome}"
-							value="#{produtoBean.getImagemBase64(produto.produtoCategoria.imagem)}"></h:graphicImage>
+						<h:graphicImage title="#{produto.nome}" value="#{produtoBean.getImagemBase64(produto.imagem)}"></h:graphicImage>
 					</div>
 					<div class="acao">
-						<div class="controle-quantidade">
-							<p:spinner id="minMax" value="#{produto.quantidade}" min="0" max="9999" />
-						</div>
-						<span class="adicionar">Adicionar ao carrinho</span>
+						<h:form styleClass="controles">
+							<div class="controle-quantidade">
+								<p:spinner value="#{produto.quantidade}" min="1" max="9999">
+									<p:ajax event="change" process="@this"/>
+								</p:spinner>
+							</div>
+							<h:commandLink class="add-produto" actionListener="#{carrinhoBean.adicionaProduto(produto)}" update="frmProduto">
+								<span class="adicionar">Adicionar ao carrinho</span>
+							</h:commandLink>
+						</h:form>
 					</div>
 				</div>
 			</ui:repeat>

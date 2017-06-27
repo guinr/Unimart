@@ -1,6 +1,8 @@
 package br.com.unisul.unimart.bean;
 
-import java.util.Base64;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -50,10 +52,6 @@ public class ProdutoBean extends GenericBean {
 		this.produtoCategoriaList = ProdutoCategoriaList;
 	}
 	
-	public String getImagemBase64(byte[] imagem) {
-		return "data:image/jpg;base64," + Base64.getMimeEncoder().encodeToString(imagem);
-	}
-	
 	// Produto
 	@PostConstruct
 	public void listar() {
@@ -87,6 +85,7 @@ public class ProdutoBean extends GenericBean {
 	
 	public void novo() {
 		produto = new Produto();
+		file = null;
 		carregaProdutoCategoriaList();
 	}
 	
@@ -110,6 +109,7 @@ public class ProdutoBean extends GenericBean {
 
 	public void salvar() {
 		try {
+			defineImagem();
 			ProdutoDao produtoDao = new ProdutoDao();
 			produtoDao.merge(produto);
 			Messages.addGlobalInfo("Produto cadastrado com sucesso");
@@ -118,6 +118,23 @@ public class ProdutoBean extends GenericBean {
 		} catch (Exception e) {
 			Messages.addGlobalError("Erro ao cadastrar produto");
 			e.printStackTrace();
+		}
+	}
+	
+	private void defineImagem() {
+		if (!file.getFileName().equals("")) {
+		    //--colocar imagem no produto
+		    produto.setImagem(file.getContents());
+		} else {
+			//--se não tiver imagem selecionada cadastra uma imagem padrao
+			//--Alterar para pegar caminho relativo
+			//--Atualizaa
+			File f = new File("C:\\Users\\heto1\\git\\Unimart\\src\\img\\SemImagem.png");
+			try {
+				produto.setImagem(Files.readAllBytes(f.toPath()));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	

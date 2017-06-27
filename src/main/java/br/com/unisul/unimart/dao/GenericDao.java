@@ -19,12 +19,29 @@ public class GenericDao <Entidade>{
 		classe = (Class<Entidade>)((ParameterizedType)getClass().getGenericSuperclass()).getActualTypeArguments()[0];
 	}
 	
-	public void Salvar(Entidade entidade){
+	public void salvar(Entidade entidade){
 		Session sessao = HibernateUtil.getFabricaDeSessoes().openSession();
 		Transaction t = null;
 		try {
 			t = sessao.beginTransaction();
 			sessao.save(entidade);
+			t.commit();
+		} catch (Exception e) {
+			if(t!=null){
+				t.rollback();
+			}
+			throw(e);
+		}finally{
+			sessao.close();
+		}
+	}
+	
+	public void atualizar(Entidade entidade){
+		Session sessao = HibernateUtil.getFabricaDeSessoes().openSession();
+		Transaction t = null;
+		try {
+			t = sessao.beginTransaction();
+			sessao.update(entidade);
 			t.commit();
 		} catch (Exception e) {
 			if(t!=null){

@@ -16,17 +16,17 @@
 						</h:outputLink>
 					</div>
 					<div class="menu-cart">
-						<h:outputLink value="/Unimart/pages/public/cart.xhtml">
+						<h:commandLink action="cart">
 							<i class="fa fa-shopping-cart"></i>
-						</h:outputLink>
+							<f:param name="codigoCarrinho" value="#{carrinhoBean.carrinho.codigo}" />
+						</h:commandLink>
 					</div>
 				</div>
 			</p:panelGrid>
 			<p:panel class="menu-bar">
 				<ui:repeat value="#{produtoCategoriaBean.produtoCategoriaList}"
 					var="categoria">
-					<h:commandLink
-						action="#{produtoBean.listarByCategoria(categoria.codigo)}">
+					<h:commandLink action="#{produtoBean.listarByCategoria(categoria.codigo)}">
 						<div class="menu-item">
 							<h:graphicImage title="#{categoria.nome}"
 								value="#{produtoCategoriaBean.getImagemBase64(categoria.imagem)}"

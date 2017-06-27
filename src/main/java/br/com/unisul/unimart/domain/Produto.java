@@ -66,7 +66,7 @@ public class Produto extends GenericDomain {
 	}
 
 	public Integer getQuantidade() {
-		if (quantidade == null) quantidade = 0;
+		if (quantidade == null) quantidade = 1;
 		return quantidade;
 	}
 

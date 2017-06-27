@@ -5,6 +5,10 @@ xmlns:h="http://xmlns.jcp.org/jsf/html"
 xmlns:p="http://primefaces.org/ui"
 xmlns:f="http://xmlns.jcp.org/jsf/core"
 xmlns:ui="http://java.sun.com/jsf/facelets">
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>Cadastro de Categoria de Produto</title>
+	</h:head>
 	<h:body>
 		<ui:composition template="/pages/templates/template.xhtml">	
 			<ui:define name="content">
@@ -15,6 +19,9 @@ xmlns:ui="http://java.sun.com/jsf/facelets">
 							<f:facet name="header">
 								<p:commandButton value="Novo" actionListener="#{produtoBean.novo}" oncomplete="PF('dlg').show()" update=":frmCad:telaCad"></p:commandButton>
 							</f:facet>
+							<p:column class="list-image" headerText="Imagem" sortBy="#{produto.imagem}">
+								<h:graphicImage value="#{produtoBean.getImagemBase64(produto.imagem)}" width="50" height="50"></h:graphicImage>
+							</p:column>
 							<p:column headerText="Nome" sortBy="produto.nome">
 								<h:outputText value="#{produto.nome}" />
 							</p:column>
@@ -50,7 +57,7 @@ xmlns:ui="http://java.sun.com/jsf/facelets">
 					</p:panel>
 				</h:form>
 				<p:dialog header="Produtos - Cadastro" widgetVar="dlg" resizable="false" draggable="false" modal="true" closable="false">
-					<h:form id="frmCad">
+					<h:form id="frmCad" enctype="multipart/form-data">
 						<h:panelGrid columns="2" id="telaCad">
 							<p:outputLabel value="Nome"/>
 							<p:inputText size="30" maxlength="30" value="#{produtoBean.produto.nome}"/>
@@ -65,9 +72,11 @@ xmlns:ui="http://java.sun.com/jsf/facelets">
 								<f:selectItem itemLabel="Selecione uma categoria" itemValue=""/>
 								<f:selectItems value="#{produtoBean.produtoCategoriaList}" var="produtoCategoria"  itemLabel="#{produtoCategoria.nome}" itemValue="#{produtoCategoria}"/>
 							</p:selectOneMenu>
+							<p:outputLabel value="Imagem"/>
+							<p:fileUpload value="#{produtoBean.file}" mode="simple" skinSimple="true" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
 						</h:panelGrid>
 						<h:panelGrid columns="2">
-							<p:commandButton value="Salvar" actionListener="#{produtoBean.salvar}" update=":msg :frmCad:telaCad :frmTab:table"/>
+							<p:commandButton value="Salvar" actionListener="#{produtoBean.salvar}" ajax="false" update=":msg :frmCad:telaCad :frmTab:table"/>
 							<p:commandButton value="Fechar" oncomplete="PF('dlg').hide();"/>
 						</h:panelGrid>
 					</h:form>
