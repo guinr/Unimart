@@ -41,6 +41,7 @@
 		<mapping class="br.com.unisul.unimart.domain.ProdutoCategoria"/>
 		<mapping class="br.com.unisul.unimart.domain.Carrinho"/>
 		<mapping class="br.com.unisul.unimart.domain.ItemCarrinho"/>
+		<mapping class="br.com.unisul.unimart.domain.Endereco"/>
 	</session-factory>
 
 </hibernate-configuration>

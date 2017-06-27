@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<h:outputStylesheet library="css" name="base.css" />
+	<h:outputStylesheet library="css" name="public.css" />
+	<h:outputStylesheet library="css" name="produto.css" />
+</h:head>
+<h:body>
+	<ui:composition template="/pages/templates/template-public.xhtml">
+		<ui:define name="content">
+			<div class="center">
+				<div class="profile">
+					<div class="profile-left">
+						<h:panelGrid rendered="#{!profileBean.editMode}"
+							styleClass="edit-table" id="divView">
+							<h:outputText value="Nome:" styleClass="label" />
+							<h:outputText value="#{user.nome}" />
+							<h:outputText value="E-mail:" styleClass="label" />
+							<h:outputText value="#{user.email}" />
+							<h:outputText value="CPF:" styleClass="label" />
+							<h:outputText value="#{user.cpf}" />
+						</h:panelGrid>
+						<h:form id="frmEdit" rendered="#{profileBean.editMode}">
+							<h:panelGrid styleClass="edit-table" id="divEdit">
+								<h:outputText value="Nome:" styleClass="label" />
+								<h:inputText value="#{user.nome}" />
+								<h:outputText value="E-mail:" styleClass="label" />
+								<h:inputText value="#{user.email}">
+									<f:validateRegex
+										pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]"></f:validateRegex>
+								</h:inputText>
+								<h:outputText value="CPF:" styleClass="label" />
+								<h:inputText value="#{user.cpf}" maxlength="14" />
+							</h:panelGrid>
+						</h:form>
+						<p:commandButton icon="fa fa-fw fa-edit" id="btnEdit"
+							styleClass="edit-button" rendered="#{!profileBean.editMode}"
+							actionListener="#{profileBean.editar}" update=":divView :frmEdit">
+							<f:attribute name="clienteAlterar" value="#{user}"></f:attribute>
+						</p:commandButton>
+						<p:commandButton icon="fa fa-fw fa-save" id="btnSave"
+							styleClass="edit-button" rendered="#{profileBean.editMode}"
+							actionListener="#{profileBean.salvar}"
+							update=":divView :frmEdit :btnEdit" />
+
+
+					</div>
+					<div class="profile-right"></div>
+				</div>
+			</div>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

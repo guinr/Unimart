@@ -19,6 +19,12 @@
 		<param-value>flick</param-value>
 	</context-param>
 
+	<!-- Font Awesome -->
+	<context-param>
+		<param-name>primefaces.FONT_AWESOME</param-name>
+		<param-value>true</param-value>
+	</context-param>
+
 	<!-- Filtro para monitorar as paginas acessadas -->
 	<filter>
 		<filter-name>PageFilter</filter-name>

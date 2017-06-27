@@ -2,6 +2,8 @@ package br.com.unisul.unimart.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @SuppressWarnings("serial")
 @Entity
@@ -21,6 +23,10 @@ public class Cliente extends GenericDomain {
 	
 	@Column
 	private Boolean admin;
+	
+	@OneToOne
+	@JoinColumn(nullable = true)
+	private Endereco endereco;
 	
 	public String getNome() {
 		return nome;
@@ -61,5 +67,14 @@ public class Cliente extends GenericDomain {
 	public void setAdmin(Boolean admin) {
 		this.admin = admin;
 	}
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+	
 	
 }

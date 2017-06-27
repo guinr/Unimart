@@ -7,6 +7,31 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <body>
 	<ui:composition>
+		<p:growl id="msg" autoUpdate="true" />
+		<p:dialog header="Login" widgetVar="dlg1" resizable="false"
+			draggable="false" modal="true" closable="false">
+			<h:form id="frmLog">
+				<h:panelGrid columns="2" id="telaLog">
+					<p:outputLabel value="E-mail" />
+					<p:inputText label="Email" id="emailLogin" size="30" maxlength="30"
+						value="#{loginBean.email}" validatorMessage="Email Inválido"
+						required="true" requiredMessage="Informe o email">
+						<f:validateRegex
+							pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]"></f:validateRegex>
+						<p:ajax update=":msg :frmLog:telaLog" event="change" />
+					</p:inputText>
+					<p:outputLabel value="Senha" />
+					<p:password label="Senha" id="senhaLogin" size="30"
+						value="#{loginBean.senha}" requiredMessage="Informe a senha" />
+				</h:panelGrid>
+				<h:panelGrid columns="2">
+					<p:commandButton value="Entrar" action="#{loginBean.doLogin}"
+						oncomplete="PF('dlg1').hide()" update=":frmLog:telaLog :frmMenu" />
+					<p:commandButton value="Cancelar" onclick="PF('dlg1').hide()"
+						update=":frmLog:telaLog" />
+				</h:panelGrid>
+			</h:form>
+		</p:dialog>
 		<h:form id="frmMenu">
 			<p:panelGrid>
 				<div class="menu">
@@ -15,18 +40,41 @@
 							<h:graphicImage value="/resources/img/logo.png" />
 						</h:outputLink>
 					</div>
-					<div class="menu-cart">
-						<h:commandLink action="cart">
-							<i class="fa fa-shopping-cart"></i>
-							<f:param name="codigoCarrinho" value="#{carrinhoBean.carrinho.codigo}" />
-						</h:commandLink>
+					<div class="left">
+						<div class="menu-user">
+							<h:outputLink id="userButton">
+								<i class="fa fa-user"></i>
+							</h:outputLink>
+
+							<p:menu overlay="true" trigger="userButton" my="left top"
+								at="left bottom">
+								<p:menuitem value="#{user.nome}" disabled="true" />
+								<p:menuitem icon="fa fa-fw fa-user" value="Perfil"
+									rendered="#{logado}" url="./profile.xhtml" />
+								<p:menuitem value="Area do Adm." icon="fa fa-fw fa-user-plus"
+									rendered="#{adm}" url="../admin/index.xhtml" />
+								<p:menuitem value="Sair" icon="fa fa-fw fa-sign-out"
+									rendered="#{logado}" action="#{loginBean.doLogout}" update=":frmMenu"/>
+								<p:menuitem value="Entrar" icon="fa fa-fw fa-sign-in"
+									actionListener="#{loginBean.novo()}"
+									oncomplete="PF('dlg1').show()" update=":frmLog:telaLog"
+									rendered="#{!logado}" />
+							</p:menu>
+						</div>
+
+						<div class="menu-cart">
+							<h:outputLink value="/Unimart/pages/public/cart.xhtml">
+								<i class="fa fa-shopping-cart"></i>
+							</h:outputLink>
+						</div>
 					</div>
 				</div>
 			</p:panelGrid>
 			<p:panel class="menu-bar">
 				<ui:repeat value="#{produtoCategoriaBean.produtoCategoriaList}"
 					var="categoria">
-					<h:commandLink action="#{produtoBean.listarByCategoria(categoria.codigo)}">
+					<h:commandLink
+						action="#{produtoBean.listarByCategoria(categoria.codigo)}">
 						<div class="menu-item">
 							<h:graphicImage title="#{categoria.nome}"
 								value="#{produtoCategoriaBean.getImagemBase64(categoria.imagem)}"

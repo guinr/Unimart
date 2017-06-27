@@ -54,10 +54,10 @@
 					url="/pages/admin/cadStatusPedido.xhtml"></p:menuitem>
 				<p:menuitem value="Entrar" styleClass="entrar" id="logBtn"
 					actionListener="#{loginBean.novo()}" oncomplete="PF('dlg1').show()"
-					update=":frmLog:telaLog" rendered="#{!loginBean.logado}"></p:menuitem>
+					update=":frmLog:telaLog" rendered="#{!logado}"></p:menuitem>
 				<p:menuitem value="Sair" styleClass="entrar" id="logoutBtn"
 					action="#{loginBean.doLogout}" 
-					update=":frmLog:telaLog :frmMenu" rendered="#{loginBean.logado}"></p:menuitem>
+					update=":frmLog:telaLog :frmMenu" rendered="#{logado}"></p:menuitem>
 			</p:menubar>
 		</h:form>
 	</ui:composition>
