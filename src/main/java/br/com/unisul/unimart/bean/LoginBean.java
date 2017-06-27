@@ -20,7 +20,6 @@ public class LoginBean extends GenericBean {
 	private Cliente cliente;
 	private String email;
 	private String senha;
-	private Boolean logado;
 
 	public Cliente getClienteLogado() {
 		return clienteLogado;
@@ -53,15 +52,7 @@ public class LoginBean extends GenericBean {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-
-	public Boolean getLogado() {
-		return logado;
-	}
-
-	public void setLogado(Boolean logado) {
-		this.logado = logado;
-	}
-
+	
 	public void novo() {
 		cliente = new Cliente();
 	}
@@ -84,11 +75,11 @@ public class LoginBean extends GenericBean {
 			return "";
 		}
 
+		sess.setAttribute("logado", true);
 		sess.setAttribute("user", clienteLogado);
 		Cliente user = (Cliente) sess.getAttribute("user");
 		sess.setAttribute("adm", (Boolean) clienteLogado.getAdmin());
 		System.out.println(user.getNome() + " Logado");
-		setLogado(true);
 		Messages.addGlobalInfo("Login efetuado com sucesso");
 		return sess.getAttribute("lastPage").toString() + "?faces-redirect=true";
 
@@ -98,6 +89,13 @@ public class LoginBean extends GenericBean {
 		SessionContext.getInstance().encerrarSessao();
 		Messages.addGlobalInfo("Logout realizado com sucesso!");
 		return "/login.xhtml?faces-redirect=true";
+	}
+	
+	public String authFailed(){
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		HttpSession sess = (HttpSession) facesContext.getExternalContext().getSession(true);
+		
+		return sess.getAttribute("previousPage").toString() + "?faces-redirect=true";
 	}
 
 }

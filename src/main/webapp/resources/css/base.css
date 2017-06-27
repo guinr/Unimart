@@ -2,3 +2,8 @@ body * {
 	outline: 0 !important;
 	text-decoration: none !important;
 }
+
+.center {
+	display: flex;
+	justify-content: center;
+}
